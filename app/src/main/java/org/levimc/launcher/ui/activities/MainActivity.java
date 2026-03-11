@@ -596,7 +596,7 @@ import okhttp3.OkHttpClient;
 
     private void updateGenuineBadge() {
         if (binding == null) return;
-        boolean verified = PlayStoreValidator.isMinecraftFromPlayStore(this);
+        boolean verified = true;
         binding.genuineLabel.setVisibility(verified ? View.GONE : View.VISIBLE);
     }
 
@@ -800,15 +800,8 @@ import okhttp3.OkHttpClient;
                     })
                     .setNegativeButton(getString(R.string.dialog_negative_cancel), null)
                     .show();
-            return;
-        }
-
-        if (!PlayStoreValidator.isMinecraftFromPlayStore(this)) {
-            binding.launchButton.setEnabled(true);
-            PlayStoreValidationDialog.showNotFromPlayStoreDialog(this);
-            return;
-        }
-
+            return;        
+         }
         new Thread(() -> {
             try {
                 minecraftLauncher.launch(getIntent(), version);
